@@ -38,8 +38,9 @@ func channelSelector(
 }
 
 func main() {
-	var mainChannel = make(chan string)
-	var secondaryChannel = make(chan string)
+	// buffered channel allows only one signal per time
+	var mainChannel = make(chan string, 1)
+	var secondaryChannel = make(chan string, 1)
 
 	go primaryProcessing(mainChannel)
 	go secondaryProcessing(secondaryChannel)
